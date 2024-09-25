@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "contracts", "contracts", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.Contracts", "Persistence.Contracts\Persistence.Contracts.csproj", "{A4862FE6-D9CE-4462-856E-32316DE2EB40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Contracts", "Application.Contracts\Application.Contracts.csproj", "{BE35FB21-E08E-494A-AD16-7493E42E5254}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A4862FE6-D9CE-4462-856E-32316DE2EB40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4862FE6-D9CE-4462-856E-32316DE2EB40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4862FE6-D9CE-4462-856E-32316DE2EB40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE35FB21-E08E-494A-AD16-7493E42E5254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE35FB21-E08E-494A-AD16-7493E42E5254}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE35FB21-E08E-494A-AD16-7493E42E5254}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE35FB21-E08E-494A-AD16-7493E42E5254}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{688858DD-FEC7-4515-933B-525E9B2A2FF5} = {59BE6FA5-BF0D-429F-B2EE-1A8A4719FE85}
@@ -46,5 +52,6 @@ Global
 		{055AD9EA-9E3A-4330-8F79-3C5866FDE3C7} = {6D637957-2E00-43BA-A22F-05464B381287}
 		{8164350B-0EA8-4BF7-8A65-AEDE6563DB88} = {59BE6FA5-BF0D-429F-B2EE-1A8A4719FE85}
 		{A4862FE6-D9CE-4462-856E-32316DE2EB40} = {8164350B-0EA8-4BF7-8A65-AEDE6563DB88}
+		{BE35FB21-E08E-494A-AD16-7493E42E5254} = {8164350B-0EA8-4BF7-8A65-AEDE6563DB88}
 	EndGlobalSection
 EndGlobal
