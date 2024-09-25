@@ -4,6 +4,7 @@ namespace Domain.Manufacturers;
 
 public sealed class Manufacturer
 {
+    private Guid _id = Guid.NewGuid();
     private string _title = default!;
     private string _description = default!;
     
@@ -23,6 +24,8 @@ public sealed class Manufacturer
             Description = parameters.Description
         });
     }
+
+    public Guid Id => _id;
 
     public string Title => _title;
 
