@@ -6,16 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
 
-[Route("manufacturers")]
+[Route("api/manufacturers")]
 public sealed class ManufacturerController : AppController
 {
     [HttpPost]
-    public async Task<NoContentResult> CreateManufacturerAsync(
+    public async Task<ActionResult<CreateManufacturerResponseDto>> CreateManufacturerAsync(
         CreateManufacturerRequestBodyDto bodyDto)
     {
-        await Sender.Send(new CreateManufacturerCommand(bodyDto), HttpContext.RequestAborted);
+        var response = await Sender.Send(new CreateManufacturerCommand(bodyDto), HttpContext.RequestAborted);
 
-        return NoContent();
+        return Ok(response);
     }
 
     [HttpPut("{manufacturerId:guid}")]
