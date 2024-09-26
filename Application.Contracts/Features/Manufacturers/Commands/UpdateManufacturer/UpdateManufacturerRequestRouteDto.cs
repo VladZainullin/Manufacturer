@@ -2,5 +2,5 @@ namespace Application.Contracts.Features.Manufacturers.Commands.UpdateManufactur
 
 public sealed class UpdateManufacturerRequestRouteDto
 {
-    public required Guid Id { get; init; }
+    public required Guid ManufacturerId { get; init; }
 }

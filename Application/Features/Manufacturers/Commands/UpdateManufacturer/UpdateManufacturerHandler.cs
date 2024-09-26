@@ -11,7 +11,7 @@ file sealed class UpdateManufacturerHandler(IDbContext context) : IRequestHandle
 {
     public async Task Handle(UpdateManufacturerCommand request, CancellationToken cancellationToken)
     {
-        var manufacturer = await GetManufacturerAsync(request.RouteDto.Id, cancellationToken);
+        var manufacturer = await GetManufacturerAsync(request.RouteDto.ManufacturerId, cancellationToken);
         if (ReferenceEquals(manufacturer, default)) return;
 
         var setTitleParameters = new SetManufacturerTitleParameters

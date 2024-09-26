@@ -2,5 +2,5 @@ namespace Application.Contracts.Features.Manufacturers.Commands.DeleteManufactur
 
 public sealed class DeleteManufacturerRequestRouteDto
 {
-    public required Guid Id { get; init; }
+    public required Guid ManufacturerId { get; init; }
 }
