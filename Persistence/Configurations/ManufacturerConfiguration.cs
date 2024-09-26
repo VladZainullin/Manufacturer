@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.Configurations;
 
-file sealed class ManufacturerConfiguration : IEntityTypeConfiguration<Manufacturer>
+internal sealed class ManufacturerConfiguration : IEntityTypeConfiguration<Manufacturer>
 {
     public void Configure(EntityTypeBuilder<Manufacturer> builder)
     {
