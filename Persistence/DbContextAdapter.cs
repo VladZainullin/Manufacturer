@@ -1,3 +1,4 @@
+using Domain.Brands;
 using Domain.Manufacturers;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
@@ -11,6 +12,8 @@ internal sealed class DbContextAdapter(DbContext context) :
 {
     public IDbSet<Manufacturer> Manufacturers { get; } =
         new DbSetAdapter<Manufacturer>(context);
+
+    public IDbSet<Brand> Brands { get; } = new DbSetAdapter<Brand>(context);
 
     public Task SaveChangesAsync(CancellationToken cancellationToken)
     {

@@ -1,4 +1,5 @@
 using Domain.Brands.Parameters;
+using Domain.Manufacturers;
 
 namespace Domain.Brands;
 
@@ -8,6 +9,9 @@ public sealed class Brand
     
     private string _title = default!;
     private string _description = default!;
+
+    private Guid _manufacturerId;
+    private Manufacturer _manufacturer = default!;
     
     private Brand()
     {
@@ -23,6 +27,11 @@ public sealed class Brand
         SetDescription(new SetBrandDescriptionParameters
         {
             Description = parameters.Description
+        });
+        
+        SetManufacturer(new SetBrandManufacturerParameters
+        {
+            Manufacturer = parameters.Manufacturer
         });
     }
 
@@ -40,5 +49,14 @@ public sealed class Brand
     public void SetDescription(SetBrandDescriptionParameters parameters)
     {
         _description = parameters.Description.Trim();
+    }
+
+    public Guid ManufacturerId => _manufacturerId;
+    public Manufacturer Manufacturer => _manufacturer;
+
+    public void SetManufacturer(SetBrandManufacturerParameters parameters)
+    {
+        _manufacturerId = parameters.Manufacturer.Id;
+        _manufacturer = parameters.Manufacturer;
     }
 }
