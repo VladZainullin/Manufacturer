@@ -1,4 +1,5 @@
 using Application;
+using MessageBroker;
 using Persistence;
 using Persistence.Contracts;
 using Serilog;
@@ -26,6 +27,7 @@ public static class Program
 
             builder.Services
                 .AddPersistenceServices()
+                .AddMessageBrokerServices(builder.Configuration)
                 .AddApplicationServices()
                 .AddWebServices();
 

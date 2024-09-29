@@ -1,11 +1,12 @@
 using Domain.Brands;
 using Domain.Manufacturers;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configurations;
 
 namespace Persistence;
 
-internal sealed class AppDbContext(DbContextOptions options) : DbContext(options)
+public sealed class AppDbContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<Manufacturer> Manufacturers => Set<Manufacturer>();
 
@@ -15,6 +16,11 @@ internal sealed class AppDbContext(DbContextOptions options) : DbContext(options
     {
         modelBuilder.ApplyConfiguration(new ManufacturerConfiguration());
         modelBuilder.ApplyConfiguration(new BrandConfiguration());
+        
+        modelBuilder.AddInboxStateEntity();
+        modelBuilder.AddOutboxMessageEntity();
+        modelBuilder.AddOutboxStateEntity();
+        modelBuilder.AddTransactionalOutboxEntities();
         
         base.OnModelCreating(modelBuilder);
     }

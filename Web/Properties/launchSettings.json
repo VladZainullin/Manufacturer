@@ -23,7 +23,14 @@
         "Serilog__WriteTo__1__Name": "File",
         "Serilog__WriteTo__1__Args__path": "Logs/log-.txt",
         "Serilog__WriteTo__1__Args__rollingInterval": "Hour",
-        "Serilog__Properties__ApplicationName": "Manufacturer redactor"
+        "Serilog__Properties__ApplicationName": "Manufacturer redactor",
+        
+        "RabbitMQ__Host": "localhost",
+        "RabbitMQ__Port": "5672",
+        "RabbitMQ__VirtualHost": "/",
+        "RabbitMQ__Username": "manufacturer_design_time",
+        "RabbitMQ__Password": "123456",
+        "RabbitMQ__AutoStart": "true"
       }
     }
   }
