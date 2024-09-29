@@ -1,3 +1,4 @@
+using Application.Contracts.Features.Manufacturers.Commands.AddBrandsToManufacturer;
 using Application.Contracts.Features.Manufacturers.Commands.CreateManufacturer;
 using Application.Contracts.Features.Manufacturers.Commands.DeleteManufacturer;
 using Application.Contracts.Features.Manufacturers.Commands.DeleteManufacturers;
@@ -41,6 +42,16 @@ public sealed class ManufacturerController : AppController
         [FromRoute] DeleteManufacturersRequestBodyDto bodyDto)
     {
         await Sender.Send(new DeleteManufacturersCommand(bodyDto), HttpContext.RequestAborted);
+
+        return NoContent();
+    }
+
+    [HttpPost("{manufacturerId:guid}/brands")]
+    public async Task<NoContentResult> AddBrandsToManufacturerAsync(
+        [FromRoute] AddBrandsToManufacturerRequestRouteDto routeDto,
+        [FromBody] AddBrandsToManufacturerRequestBodyDto bodyDto)
+    {
+        await Sender.Send(new AddBrandsToManufacturerCommand(routeDto, bodyDto), HttpContext.RequestAborted);
 
         return NoContent();
     }
