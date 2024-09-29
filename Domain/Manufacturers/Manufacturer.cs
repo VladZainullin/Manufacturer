@@ -49,7 +49,7 @@ public sealed class Manufacturer
 
     public void AddBrands(AddManufacturerBrandsParameters parameters)
     {
-        var newBrands = parameters.Brands
+        var addableBrands = parameters.Brands
             .DistinctBy(static b => b.Title)
             .ExceptBy(_brands.Select(static b => b.Title), static b => b.Title)
             .Select(b => new Brand(new CreateBrandParameters
@@ -60,6 +60,18 @@ public sealed class Manufacturer
             }))
             .ToArray();
         
-        _brands.AddRange(newBrands);
+        _brands.AddRange(addableBrands);
+    }
+
+    public void RemoveBrands(RemoveManufacturerBrandsParameters parameters)
+    {
+        var removableBrands = _brands
+            .Intersect(parameters.Brands)
+            .ToArray();
+        
+        foreach (var measurementUnitPosition in removableBrands)
+        {
+            _brands.Remove(measurementUnitPosition);
+        }
     }
 }
