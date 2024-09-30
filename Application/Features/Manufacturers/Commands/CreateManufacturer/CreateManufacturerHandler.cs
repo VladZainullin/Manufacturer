@@ -7,7 +7,7 @@ using Persistence.Contracts;
 
 namespace Application.Features.Manufacturers.Commands.CreateManufacturer;
 
-file sealed class CreateManufacturerHandler(IDbContext context) : 
+file sealed class CreateManufacturerHandler(IDbContext context, TimeProvider timeProvider) : 
     IRequestHandler<CreateManufacturerCommand, CreateManufacturerResponseDto>
 {
     public async Task<CreateManufacturerResponseDto> Handle(
@@ -24,7 +24,8 @@ file sealed class CreateManufacturerHandler(IDbContext context) :
         var parameters = new CreateManufacturerParameters
         {
             Title = request.BodyDto.Title,
-            Description = request.BodyDto.Description
+            Description = request.BodyDto.Description,
+            TimeProvider = timeProvider
         };
         var manufacturer = new Manufacturer(parameters);
             

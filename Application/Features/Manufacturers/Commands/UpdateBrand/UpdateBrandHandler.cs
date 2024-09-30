@@ -7,7 +7,7 @@ using Persistence.Contracts;
 
 namespace Application.Features.Manufacturers.Commands.UpdateBrand;
 
-file sealed class UpdateBrandHandler(IDbContext context) : IRequestHandler<UpdateBrandCommand>
+file sealed class UpdateBrandHandler(IDbContext context, TimeProvider timeProvider) : IRequestHandler<UpdateBrandCommand>
 {
     public async Task Handle(UpdateBrandCommand request, CancellationToken cancellationToken)
     {
@@ -23,13 +23,16 @@ file sealed class UpdateBrandHandler(IDbContext context) : IRequestHandler<Updat
         
         brand.SetTitle(new SetBrandTitleParameters
         {
-            Title = request.BodyDto.Title
+            Title = request.BodyDto.Title,
+            TimeProvider = timeProvider
         });
-        
-        brand.SetDescription(new SetBrandDescriptionParameters
+
+        var parameters = new SetBrandDescriptionParameters
         {
-            Description = request.BodyDto.Description
-        });
+            Description = request.BodyDto.Description,
+            TimeProvider = timeProvider
+        };
+        brand.SetDescription(parameters);
 
         await context.SaveChangesAsync(cancellationToken);
     }

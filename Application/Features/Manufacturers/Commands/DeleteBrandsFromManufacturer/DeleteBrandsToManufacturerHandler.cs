@@ -8,7 +8,7 @@ using Persistence.Contracts;
 
 namespace Application.Features.Manufacturers.Commands.DeleteBrandsFromManufacturer;
 
-public sealed class DeleteBrandsToManufacturerHandler(IDbContext context) : 
+public sealed class DeleteBrandsToManufacturerHandler(IDbContext context, TimeProvider timeProvider) : 
     IRequestHandler<DeleteBrandsToManufacturerCommand>
 {
     public async Task Handle(DeleteBrandsToManufacturerCommand request, CancellationToken cancellationToken)
@@ -18,7 +18,9 @@ public sealed class DeleteBrandsToManufacturerHandler(IDbContext context) :
         
         manufacturer.RemoveBrands(new RemoveManufacturerBrandsParameters
         {
-            Brands = await GetBrandsAsync(request.BodyDto.BrandIds, cancellationToken)
+            Brands = await GetBrandsAsync(request.BodyDto.BrandIds,
+                cancellationToken),
+            TimeProvider = timeProvider
         });
 
         await context.SaveChangesAsync(cancellationToken);

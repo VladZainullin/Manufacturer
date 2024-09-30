@@ -12,6 +12,9 @@ public sealed class Manufacturer
 
     private readonly List<Brand> _brands = [];
     
+    private DateTimeOffset _updatedAt;
+    private DateTimeOffset _createdAt;
+    
     private Manufacturer()
     {
     }
@@ -20,13 +23,17 @@ public sealed class Manufacturer
     {
         SetTitle(new SetManufacturerTitleParameters
         {
-            Title = parameters.Title
+            Title = parameters.Title,
+            TimeProvider = parameters.TimeProvider
         });
         
         SetDescription(new SetManufacturerDescriptionParameters
         {
-            Description = parameters.Description
+            Description = parameters.Description,
+            TimeProvider = parameters.TimeProvider
         });
+
+        _createdAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public Guid Id => _id;
@@ -36,6 +43,7 @@ public sealed class Manufacturer
     public void SetTitle(SetManufacturerTitleParameters parameters)
     {
         _title = parameters.Title;
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
     
     public string Description => _description;
@@ -43,6 +51,7 @@ public sealed class Manufacturer
     public void SetDescription(SetManufacturerDescriptionParameters parameters)
     {
         _description = parameters.Description;
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public IReadOnlyCollection<Brand> Brands => _brands.AsReadOnly();
@@ -56,6 +65,7 @@ public sealed class Manufacturer
             {
                 Title = b.Title,
                 Description = b.Description,
+                TimeProvider = parameters.TimeProvider,
                 Manufacturer = this
             }))
             .ToArray();
@@ -73,5 +83,11 @@ public sealed class Manufacturer
         {
             _brands.Remove(measurementUnitPosition);
         }
+
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
+    
+    public DateTimeOffset CreatedAt => _createdAt;
+    
+    public DateTimeOffset UpdatedAt => _updatedAt;
 }

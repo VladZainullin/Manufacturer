@@ -7,7 +7,7 @@ using Persistence.Contracts;
 
 namespace Application.Features.Manufacturers.Commands.AddBrandsToManufacturer;
 
-public sealed class AddBrandsToManufacturerHandler(IDbContext context) :
+public sealed class AddBrandsToManufacturerHandler(IDbContext context, TimeProvider timeProvider) :
     IRequestHandler<AddBrandsToManufacturerCommand>
 {
     public async Task Handle(
@@ -24,7 +24,8 @@ public sealed class AddBrandsToManufacturerHandler(IDbContext context) :
                 {
                     Title = b.Title,
                     Description = b.Description
-                })
+                }),
+            TimeProvider = timeProvider
         });
 
         await context.SaveChangesAsync(cancellationToken);

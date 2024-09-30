@@ -7,7 +7,7 @@ using Persistence.Contracts;
 
 namespace Application.Features.Manufacturers.Commands.UpdateManufacturer;
 
-file sealed class UpdateManufacturerHandler(IDbContext context) : IRequestHandler<UpdateManufacturerCommand>
+file sealed class UpdateManufacturerHandler(IDbContext context, TimeProvider timeProvider) : IRequestHandler<UpdateManufacturerCommand>
 {
     public async Task Handle(UpdateManufacturerCommand request, CancellationToken cancellationToken)
     {
@@ -16,13 +16,15 @@ file sealed class UpdateManufacturerHandler(IDbContext context) : IRequestHandle
 
         var setTitleParameters = new SetManufacturerTitleParameters
         {
-            Title = request.BodyDto.Title
+            Title = request.BodyDto.Title,
+            TimeProvider = timeProvider
         };
         manufacturer.SetTitle(setTitleParameters);
 
         var setDescriptionParameters = new SetManufacturerDescriptionParameters
         {
-            Description = request.BodyDto.Description
+            Description = request.BodyDto.Description,
+            TimeProvider = timeProvider
         };
         manufacturer.SetDescription(setDescriptionParameters);
 
