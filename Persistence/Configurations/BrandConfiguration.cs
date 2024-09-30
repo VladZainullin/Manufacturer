@@ -16,6 +16,7 @@ internal sealed class BrandConfiguration : IEntityTypeConfiguration<Brand>
 
         builder
             .HasOne(static b => b.Manufacturer)
-            .WithMany(static b => b.Brands);
+            .WithMany(static b => b.Brands)
+            .HasForeignKey("_manufacturerId");
     }
 }
