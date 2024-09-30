@@ -1,4 +1,4 @@
-namespace Application.Features.Manufacturers.Queries.GetManufacturers;
+namespace Application.Contracts.Features.Manufacturers.Queries.GetManufacturers;
 
 public sealed class GetManufacturersRequestQueryDto
 {

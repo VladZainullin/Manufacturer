@@ -4,6 +4,8 @@ using Application.Contracts.Features.Manufacturers.Commands.DeleteBrandsFromManu
 using Application.Contracts.Features.Manufacturers.Commands.DeleteManufacturer;
 using Application.Contracts.Features.Manufacturers.Commands.DeleteManufacturers;
 using Application.Contracts.Features.Manufacturers.Commands.UpdateManufacturer;
+using Application.Contracts.Features.Manufacturers.Queries.GetManufacturer;
+using Application.Contracts.Features.Manufacturers.Queries.GetManufacturers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
@@ -65,5 +67,19 @@ public sealed class ManufacturerController : AppController
         await Sender.Send(new DeleteBrandsToManufacturerCommand(routeDto, bodyDto), HttpContext.RequestAborted);
 
         return NoContent();
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<GetManufacturersResponseDto>> GetManufacturersAsync(
+        [FromQuery] GetManufacturersRequestQueryDto queryDto)
+    {
+        return Ok(await Sender.Send(new GetManufacturersQuery(queryDto), HttpContext.RequestAborted));
+    }
+    
+    [HttpGet("{manufacturerId:guid}")]
+    public async Task<ActionResult<GetManufacturersResponseDto>> GetManufacturerAsync(
+        [FromRoute] GetManufacturerRequestRouteDto routeDto)
+    {
+        return Ok(await Sender.Send(new GetManufacturerQuery(routeDto), HttpContext.RequestAborted));
     }
 }
