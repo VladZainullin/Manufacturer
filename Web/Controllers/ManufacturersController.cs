@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
 
-[Route("manufacturers")]
+[Route("api/manufacturers")]
 public sealed class ManufacturersController : AppController
 {
     [HttpGet]
